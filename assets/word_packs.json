@@ -1,0 +1,94 @@
+[
+  {
+    "id": "food",
+    "nameEn": "Food",
+    "nameNe": "खाना",
+    "entries": [
+      {"word": "Momo", "wordDevanagari": "मोमो", "category": "Food", "guptacharHint": "Steamed"},
+      {"word": "Chatpate", "wordDevanagari": "चट्पटे", "category": "Food", "guptacharHint": "Spicy"},
+      {"word": "Sel Roti", "wordDevanagari": "सेल रोटी", "category": "Food", "guptacharHint": "Festive"},
+      {"word": "Kwati", "wordDevanagari": "क्वाटी", "category": "Food", "guptacharHint": "Beans"},
+      {"word": "Dal Bhat", "wordDevanagari": "दाल भात", "category": "Food", "guptacharHint": "Staple"},
+      {"word": "Sukuti", "wordDevanagari": "सुकुटी", "category": "Food", "guptacharHint": "Smoky"},
+      {"word": "Juju Dhau", "wordDevanagari": "जुजु धौ", "category": "Food", "guptacharHint": "Royal"}
+    ]
+  },
+  {
+    "id": "places",
+    "nameEn": "Places",
+    "nameNe": "स्थानहरू",
+    "entries": [
+      {"word": "Thamel", "wordDevanagari": "ठमेल", "category": "Places", "guptacharHint": "Busy"},
+      {"word": "Pokhara", "wordDevanagari": "पोखरा", "category": "Places", "guptacharHint": "Lakeside"},
+      {"word": "Pashupatinath", "wordDevanagari": "पशुपतिनाथ", "category": "Places", "guptacharHint": "Temple"},
+      {"word": "Lumbini", "wordDevanagari": "लुम्बिनी", "category": "Places", "guptacharHint": "Birthplace"},
+      {"word": "Nagarkot", "wordDevanagari": "नगरकोट", "category": "Places", "guptacharHint": "Sunrise"},
+      {"word": "Bandipur", "wordDevanagari": "बन्दीपुर", "category": "Places", "guptacharHint": "Hilltop"}
+    ]
+  },
+  {
+    "id": "animals",
+    "nameEn": "Animals",
+    "nameNe": "जनावर",
+    "entries": [
+      {"word": "Yak", "wordDevanagari": "याक", "category": "Animals", "guptacharHint": "Shaggy"},
+      {"word": "Panda", "wordDevanagari": "पाण्डा", "category": "Animals", "guptacharHint": "Cute"},
+      {"word": "Rhino", "wordDevanagari": "गैंडा", "category": "Animals", "guptacharHint": "Horned"},
+      {"word": "Langur", "wordDevanagari": "लंगुर", "category": "Animals", "guptacharHint": "Leaping"},
+      {"word": "Tiger", "wordDevanagari": "बाघ", "category": "Animals", "guptacharHint": "Striped"},
+      {"word": "Peacock", "wordDevanagari": "मयूर", "category": "Animals", "guptacharHint": "Colorful"}
+    ]
+  },
+  {
+    "id": "sports",
+    "nameEn": "Sports",
+    "nameNe": "खेल",
+    "entries": [
+      {"word": "Football", "wordDevanagari": "फुटबल", "category": "Sports", "guptacharHint": "Goal"},
+      {"word": "Cricket", "wordDevanagari": "क्रिकेट", "category": "Sports", "guptacharHint": "Bat"},
+      {"word": "Volleyball", "wordDevanagari": "भलिबल", "category": "Sports", "guptacharHint": "Net"},
+      {"word": "Basketball", "wordDevanagari": "बास्केटबल", "category": "Sports", "guptacharHint": "Hoop"},
+      {"word": "Badminton", "wordDevanagari": "ब्याडमिन्टन", "category": "Sports", "guptacharHint": "Shuttle"},
+      {"word": "Hiking", "wordDevanagari": "हाइकिङ", "category": "Sports", "guptacharHint": "Trail"}
+    ]
+  },
+  {
+    "id": "school",
+    "nameEn": "School",
+    "nameNe": "स्कुल",
+    "entries": [
+      {"word": "Homework", "wordDevanagari": "गृहकार्य", "category": "School", "guptacharHint": "Assignment"},
+      {"word": "Exam", "wordDevanagari": "परीक्षा", "category": "School", "guptacharHint": "Test"},
+      {"word": "Notebook", "wordDevanagari": "कापी", "category": "School", "guptacharHint": "Pages"},
+      {"word": "Uniform", "wordDevanagari": "युनिफर्म", "category": "School", "guptacharHint": "Dress"},
+      {"word": "Library", "wordDevanagari": "पुस्तकालय", "category": "School", "guptacharHint": "Quiet"},
+      {"word": "Bell", "wordDevanagari": "घण्टी", "category": "School", "guptacharHint": "Ring"}
+    ]
+  },
+  {
+    "id": "music",
+    "nameEn": "Music",
+    "nameNe": "संगीत",
+    "entries": [
+      {"word": "Guitar", "wordDevanagari": "गितार", "category": "Music", "guptacharHint": "Strings"},
+      {"word": "Drum", "wordDevanagari": "ढोल", "category": "Music", "guptacharHint": "Beat"},
+      {"word": "Song", "wordDevanagari": "गीत", "category": "Music", "guptacharHint": "Tune"},
+      {"word": "Dance", "wordDevanagari": "नृत्य", "category": "Music", "guptacharHint": "Move"},
+      {"word": "Singer", "wordDevanagari": "गायक", "category": "Music", "guptacharHint": "Voice"},
+      {"word": "Stage", "wordDevanagari": "मञ्च", "category": "Music", "guptacharHint": "Spotlight"}
+    ]
+  },
+  {
+    "id": "tech",
+    "nameEn": "Tech",
+    "nameNe": "प्रविधि",
+    "entries": [
+      {"word": "Phone", "wordDevanagari": "फोन", "category": "Tech", "guptacharHint": "Call"},
+      {"word": "Laptop", "wordDevanagari": "ल्यापटप", "category": "Tech", "guptacharHint": "Portable"},
+      {"word": "WiFi", "wordDevanagari": "वाईफाई", "category": "Tech", "guptacharHint": "Signal"},
+      {"word": "App", "wordDevanagari": "एप", "category": "Tech", "guptacharHint": "Tap"},
+      {"word": "Camera", "wordDevanagari": "क्यामेरा", "category": "Tech", "guptacharHint": "Snap"},
+      {"word": "Battery", "wordDevanagari": "ब्याट्री", "category": "Tech", "guptacharHint": "Charge"}
+    ]
+  }
+]

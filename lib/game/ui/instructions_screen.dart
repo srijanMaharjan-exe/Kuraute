@@ -46,8 +46,8 @@ class InstructionsScreen extends ConsumerWidget {
           ),
           _StepText(
             text: biText(
-              en: '5. See result and Did You Know fact.',
-              ne: '५. नतिजा र Did You Know तथ्य हेर्नुहोस्।',
+              en: '5. See the result and the final reveal.',
+              ne: '५. नतिजा र अन्तिम खुलासा हेर्नुहोस्।',
               language: language,
             ),
           ),

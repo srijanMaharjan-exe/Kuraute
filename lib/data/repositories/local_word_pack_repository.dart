@@ -1,6 +1,8 @@
 import 'dart:math';
+import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:flutter/services.dart';
 
 import '../models/word_entry.dart';
 import '../models/word_pack.dart';
@@ -9,14 +11,25 @@ class LocalWordPackRepository {
   LocalWordPackRepository(this._box);
 
   static const boxName = 'word_packs_box';
+  static const defaultPacksAssetPath = 'assets/word_packs.json';
   final Box<Map> _box;
 
   Future<void> seedDefaultsIfEmpty() async {
     if (_box.isNotEmpty) return;
 
-    for (final pack in defaultPacks) {
+    final packs = await loadDefaultPacks();
+    for (final pack in packs) {
       await _box.put(pack.id, pack.toJson());
     }
+  }
+
+  Future<List<WordPack>> loadDefaultPacks() async {
+    final rawJson = await rootBundle.loadString(defaultPacksAssetPath);
+    final decoded = jsonDecode(rawJson) as List<dynamic>;
+    return decoded
+        .cast<Map<dynamic, dynamic>>()
+        .map(WordPack.fromJson)
+        .toList(growable: false);
   }
 
   List<WordPack> getAllPacks() {
@@ -62,90 +75,3 @@ class LocalWordPackRepository {
     return allEntries[rng.nextInt(allEntries.length)];
   }
 }
-
-final defaultPacks = <WordPack>[
-  const WordPack(
-    id: 'food',
-    nameEn: 'Food',
-    nameNe: 'खाना',
-    entries: [
-      WordEntry(
-        word: 'Momo',
-        wordDevanagari: 'मोमो',
-        category: 'Food',
-        guptacharHint: 'Something you can eat',
-        didYouKnow: 'Fun mode word.',
-      ),
-      WordEntry(
-        word: 'Chatpate',
-        wordDevanagari: 'चट्पटे',
-        category: 'Food',
-        guptacharHint: 'Often shared with friends',
-        didYouKnow: 'Fun mode word.',
-      ),
-      WordEntry(
-        word: 'Sel Roti',
-        wordDevanagari: 'सेल रोटी',
-        category: 'Food',
-        guptacharHint: 'Popular during occasions',
-        didYouKnow: 'Fun mode word.',
-      ),
-    ],
-  ),
-  const WordPack(
-    id: 'places',
-    nameEn: 'Places',
-    nameNe: 'स्थानहरू',
-    entries: [
-      WordEntry(
-        word: 'Thamel',
-        wordDevanagari: 'ठमेल',
-        category: 'Places',
-        guptacharHint: 'A crowded place',
-        didYouKnow: 'Fun mode word.',
-      ),
-      WordEntry(
-        word: 'Pokhara',
-        wordDevanagari: 'पोखरा',
-        category: 'Places',
-        guptacharHint: 'A travel favorite',
-        didYouKnow: 'Fun mode word.',
-      ),
-      WordEntry(
-        word: 'Pashupatinath',
-        wordDevanagari: 'पशुपतिनाथ',
-        category: 'Places',
-        guptacharHint: 'A well-known location',
-        didYouKnow: 'Fun mode word.',
-      ),
-    ],
-  ),
-  const WordPack(
-    id: 'legends',
-    nameEn: 'Legends',
-    nameNe: 'किंवदन्ती',
-    entries: [
-      WordEntry(
-        word: 'Yeti',
-        wordDevanagari: 'येति',
-        category: 'Legends',
-        guptacharHint: 'Something mysterious',
-        didYouKnow: 'Fun mode word.',
-      ),
-      WordEntry(
-        word: 'Kichkandi',
-        wordDevanagari: 'किचकण्डी',
-        category: 'Legends',
-        guptacharHint: 'A story many have heard',
-        didYouKnow: 'Fun mode word.',
-      ),
-      WordEntry(
-        word: 'Boksi',
-        wordDevanagari: 'बोक्सी',
-        category: 'Legends',
-        guptacharHint: 'A character from folklore',
-        didYouKnow: 'Fun mode word.',
-      ),
-    ],
-  ),
-];

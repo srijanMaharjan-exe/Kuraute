@@ -16,8 +16,16 @@ class HomeScreen extends ConsumerWidget {
         return Icons.restaurant;
       case 'places':
         return Icons.landscape;
-      case 'legends':
-        return Icons.auto_awesome;
+      case 'animals':
+        return Icons.pets;
+      case 'sports':
+        return Icons.sports_soccer;
+      case 'school':
+        return Icons.school;
+      case 'music':
+        return Icons.music_note;
+      case 'tech':
+        return Icons.memory;
       default:
         return Icons.category;
     }
@@ -32,9 +40,9 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
+        leading: const IconButton(
           onPressed: null,
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
         ),
         title: const Text('KURAUTE'),
         actions: [
@@ -272,7 +280,11 @@ class HomeScreen extends ConsumerWidget {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              pack.nameEn,
+                              biText(
+                                en: pack.nameEn,
+                                ne: pack.nameNe,
+                                language: state.language,
+                              ),
                               style: GoogleFonts.plusJakartaSans(
                                 fontWeight: FontWeight.w800,
                                 color: selected ? Colors.white : const Color(0xFF373830),

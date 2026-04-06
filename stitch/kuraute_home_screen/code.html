@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KURAUTE - Who's the gossip?</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Mukta:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#373830",
+              "inverse-surface": "#0d0f08",
+              "primary-fixed-dim": "#ff5866",
+              "surface-bright": "#fefdf1",
+              "secondary": "#776300",
+              "on-error": "#ffffff",
+              "on-tertiary-fixed-variant": "#292b8d",
+              "secondary-fixed-dim": "#efc900",
+              "surface-container-highest": "#e9e9da",
+              "on-secondary-fixed": "#453900",
+              "on-tertiary-fixed": "#030062",
+              "on-tertiary": "#ffffff",
+              "on-error-container": "#520c00",
+              "surface-variant": "#e9e9da",
+              "on-primary-fixed": "#000000",
+              "inverse-primary": "#ff5261",
+              "on-surface-variant": "#64655c",
+              "on-secondary-container": "#5b4b00",
+              "secondary-dim": "#695700",
+              "outline-variant": "#babaaf",
+              "tertiary-fixed": "#a6a9ff",
+              "inverse-on-surface": "#9d9d93",
+              "error-dim": "#b92902",
+              "surface-tint": "#ca0033",
+              "surface-container": "#f5f4e7",
+              "outline": "#818177",
+              "error-container": "#f95630",
+              "on-tertiary-container": "#1f2084",
+              "on-primary-container": "#4e000e",
+              "surface": "#fefdf1",
+              "tertiary-container": "#a6a9ff",
+              "on-secondary-fixed-variant": "#665500",
+              "primary-dim": "#b3002c",
+              "tertiary-fixed-dim": "#959aff",
+              "tertiary-dim": "#494dae",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#ff757b",
+              "surface-container-low": "#fbfaed",
+              "secondary-fixed": "#ffd709",
+              "secondary-container": "#ffd709",
+              "on-background": "#373830",
+              "error": "#be2d06",
+              "tertiary": "#565abb",
+              "surface-dim": "#e3e4d4",
+              "primary": "#ca0033",
+              "primary-container": "#ff757b",
+              "background": "#fefdf1",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#600013",
+              "surface-container-high": "#efefe0",
+              "on-primary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Manrope"],
+              "nepali": ["Mukta"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .bg-pattern {
+            background-color: #fefdf1;
+            background-image: radial-gradient(#ca0033 0.5px, transparent 0.5px), radial-gradient(#ca0033 0.5px, #fefdf1 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.05;
+        }
+        .radial-hero {
+            background: radial-gradient(circle at top right, #ff757b 0%, #ca0033 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen overflow-x-hidden flex flex-col">
+<!-- Top Navigation Anchor (Manual mapping based on JSON) -->
+<header class="bg-[#fefdf1] dark:bg-[#0d0f08] flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#ca0033] dark:text-[#ff757b]">arrow_back</span>
+</div>
+<h1 class="font-['Plus_Jakarta_Sans'] tracking-tight text-xl md:text-2xl font-black text-[#ca0033] dark:text-[#ff757b] uppercase">KURAUTE</h1>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#ca0033] dark:text-[#ff757b]">language</span>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-6 pb-32">
+<!-- Hero Section -->
+<section class="mt-8 mb-12 relative">
+<div class="absolute inset-0 bg-pattern rounded-lg -z-10"></div>
+<div class="text-center py-10 px-4">
+<div class="mb-4 inline-block px-4 py-1 bg-secondary-container text-on-secondary-container rounded-full text-sm font-bold tracking-widest">NEPAL-MODERN GAME</div>
+<h2 class="font-headline text-5xl md:text-7xl font-extrabold text-primary tracking-tighter mb-2">KURAUTE</h2>
+<p class="font-nepali text-3xl font-bold text-on-surface-variant mb-4">कुराउटे</p>
+<p class="text-lg md:text-xl font-medium italic text-on-surface-variant">"Who's the gossip?"</p>
+</div>
+</section>
+<!-- Configuration Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Language & Time Settings -->
+<div class="space-y-8">
+<!-- Language Toggle -->
+<div class="space-y-4">
+<label class="font-headline text-sm font-bold uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">translate</span> Select Language
+                    </label>
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-highest text-primary rounded-xl font-bold border-2 border-primary transition-all active:scale-95">
+<span class="material-symbols-outlined">abc</span> English
+                        </button>
+<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-low text-on-surface rounded-xl font-bold hover:bg-surface-container-high transition-all active:scale-95">
+<span class="font-nepali text-lg">ने</span> Nepali
+                        </button>
+<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-low text-on-surface rounded-xl font-bold hover:bg-surface-container-high transition-all active:scale-95">
+<span class="material-symbols-outlined">join_inner</span> Both
+                        </button>
+</div>
+</div>
+<!-- Timer Selector -->
+<div class="space-y-4 bg-surface-container-low p-6 rounded-lg">
+<div class="flex justify-between items-center mb-2">
+<label class="font-headline text-sm font-bold uppercase tracking-widest text-on-surface-variant">Round Timer</label>
+<span class="text-2xl font-black text-primary">120s</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container-highest rounded-full text-primary font-bold active:scale-90 transition-transform">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<div class="flex-grow h-3 bg-surface-container-highest rounded-full relative">
+<div class="absolute left-0 top-0 h-full w-[40%] bg-primary rounded-full"></div>
+<div class="absolute left-[40%] top-1/2 -translate-y-1/2 w-6 h-6 bg-primary border-4 border-surface rounded-full shadow-lg"></div>
+</div>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container-highest rounded-full text-primary font-bold active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="flex justify-between text-xs font-bold text-outline uppercase tracking-tighter">
+<span>30 sec</span>
+<span>300 sec</span>
+</div>
+</div>
+</div>
+<!-- Categories Section -->
+<div class="space-y-4">
+<label class="font-headline text-sm font-bold uppercase tracking-widest text-on-surface-variant">Select Categories</label>
+<div class="grid grid-cols-2 gap-3">
+<!-- Category Card -->
+<div class="bg-primary text-white p-4 rounded-lg flex flex-col items-center justify-center gap-2 shadow-xl shadow-primary/10 transition-all active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<span class="font-bold tracking-tight">Food</span>
+<div class="absolute top-2 right-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+</div>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-low p-4 rounded-lg flex flex-col items-center justify-center gap-2 border-2 border-transparent hover:border-primary/20 transition-all active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant">landscape</span>
+<span class="font-bold tracking-tight text-on-surface">Places</span>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-low p-4 rounded-lg flex flex-col items-center justify-center gap-2 border-2 border-transparent hover:border-primary/20 transition-all active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant">auto_awesome</span>
+<span class="font-bold tracking-tight text-on-surface">Legends</span>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-low p-4 rounded-lg flex flex-col items-center justify-center gap-2 border-2 border-transparent hover:border-primary/20 transition-all active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant">pets</span>
+<span class="font-bold tracking-tight text-on-surface">Animals</span>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-low p-4 rounded-lg flex flex-col items-center justify-center gap-2 border-2 border-transparent hover:border-primary/20 transition-all active:scale-95 cursor-pointer col-span-2">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant">movie</span>
+<span class="font-bold tracking-tight text-on-surface">Movies</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-12 flex flex-col gap-4 max-w-md mx-auto">
+<button class="w-full py-6 bg-primary text-white rounded-xl font-headline text-2xl font-black tracking-widest shadow-2xl shadow-primary/30 transition-all active:scale-95 flex items-center justify-center gap-3">
+                START GAME
+                <span class="material-symbols-outlined">play_arrow</span>
+</button>
+<button class="w-full py-4 bg-transparent text-primary rounded-xl font-headline text-lg font-bold tracking-wider border-2 border-primary/20 hover:bg-primary/5 transition-all active:scale-95 uppercase">
+                Instructions
+            </button>
+</div>
+<!-- Visual Decoration Section -->
+<section class="mt-16 grid grid-cols-2 gap-4">
+<div class="aspect-square rounded-lg overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="vibrant street food in Kathmandu with golden afternoon light and steam rising from spicy momo dumplings" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrf6gxLzTHXCAIf7NHp8qfS36-FZewe_qrsnL4NmaMBTi_H9s2pjpEnM_OweCIsEi-6ar8oy3SJdAL72YXE6U4AsMba4V6pRCBBs7_NUSsMiSneJkyPuMg5lbSKg84WtX8bmpkwIakhD0Vix2OmxWnMoJPg6TZ-7HcyRA8xl2LgnvGZYJDxWkhKEM6EBC-Q1UmdOE_8W4lmx_R0tpbM49UwyXc9nkkBcglyIwkS53ksIrMxGjcge-woqvnihpiWVqtaK99dr-Fppg"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+</div>
+<div class="aspect-square rounded-lg bg-secondary flex items-center justify-center p-8 overflow-hidden relative">
+<span class="material-symbols-outlined text-[8rem] text-surface opacity-10 absolute -right-4 -bottom-4">campaign</span>
+<p class="text-surface font-headline font-black text-3xl leading-none rotate-12">DON'T GET CAUGHT!</p>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell (Manual mapping based on JSON) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-8 pb-6 pt-4 bg-[#fefdf1] dark:bg-[#0d0f08] border-t border-[#ca0033]/15 shadow-[0_-4px_32px_rgba(96,0,19,0.05)] rounded-t-[3rem]">
+<!-- Home Active -->
+<div class="flex flex-col items-center justify-center bg-[#ca0033] text-white rounded-full p-3 scale-110">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<!-- Help Inactive -->
+<div class="flex flex-col items-center justify-center text-[#565abb] dark:text-[#9ea2ff] p-3 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">help</span>
+</div>
+<!-- Leaderboard Inactive -->
+<div class="flex flex-col items-center justify-center text-[#565abb] dark:text-[#9ea2ff] p-3 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">leaderboard</span>
+</div>
+</nav>
+</body></html>

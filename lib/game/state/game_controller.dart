@@ -39,6 +39,7 @@ class GameController extends StateNotifier<GameState> {
             language: _languageFromCode(_settingsRepo.getLanguageCode()),
             roundDurationSeconds: _settingsRepo.getRoundDurationSeconds(),
             remainingSeconds: _settingsRepo.getRoundDurationSeconds(),
+            discussionTimerEnabled: _settingsRepo.getDiscussionTimerEnabled(),
             players: _settingsRepo.getRecentPlayers(),
           ),
         );
@@ -96,6 +97,11 @@ class GameController extends StateNotifier<GameState> {
       remainingSeconds: safeSeconds,
     );
     unawaited(_settingsRepo.saveRoundDurationSeconds(safeSeconds));
+  }
+
+  void setDiscussionTimerEnabled(bool enabled) {
+    state = state.copyWith(discussionTimerEnabled: enabled);
+    unawaited(_settingsRepo.saveDiscussionTimerEnabled(enabled));
   }
 
   void setPlayers(List<String> players) {
@@ -162,7 +168,7 @@ class GameController extends StateNotifier<GameState> {
   }
 
   void tickRoundTimer() {
-    if (state.gamePhase != GamePhase.discussion) return;
+    if (state.gamePhase != GamePhase.discussion || !state.discussionTimerEnabled) return;
     final next = state.remainingSeconds - 1;
     final updated = next < 0 ? 0 : next;
     state = state.copyWith(remainingSeconds: updated);

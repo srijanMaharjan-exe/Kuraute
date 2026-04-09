@@ -83,24 +83,6 @@ class HomeScreen extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(22, 8, 22, 28),
               children: [
                 const SizedBox(height: 8),
-                Center(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFD709),
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                    child: Text(
-                      'NEPAL-MODERN GAME',
-                      style: GoogleFonts.plusJakartaSans(
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 1.3,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
                 Text(
                   'KURAUTE',
                   textAlign: TextAlign.center,
@@ -190,6 +172,28 @@ class HomeScreen extends ConsumerWidget {
                       const SizedBox(height: 8),
                       Row(
                         children: [
+                          Text(
+                            biText(
+                              en: 'Timer on for discussion',
+                              ne: 'छलफलका लागि टाइमर सक्रिय',
+                              language: state.language,
+                            ),
+                            style: GoogleFonts.manrope(
+                              fontWeight: FontWeight.w700,
+                              color: const Color(0xFF64655C),
+                            ),
+                          ),
+                          const Spacer(),
+                          Switch.adaptive(
+                            value: state.discussionTimerEnabled,
+                            activeColor: const Color(0xFFCA0033),
+                            onChanged: controller.setDiscussionTimerEnabled,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
                           _CircleIconButton(
                             icon: Icons.remove,
                             onTap: () => controller.setRoundDuration(state.roundDurationSeconds - 10),
@@ -229,74 +233,6 @@ class HomeScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 26),
-                Text(
-                  'SELECT CATEGORIES',
-                  style: GoogleFonts.plusJakartaSans(
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.1,
-                    color: const Color(0xFF64655C),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                GridView.builder(
-                  itemCount: packs.length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 1.25,
-                  ),
-                  itemBuilder: (context, index) {
-                    final pack = packs[index];
-                    final selected = state.selectedPackIds.contains(pack.id);
-                    return InkWell(
-                      borderRadius: BorderRadius.circular(28),
-                      onTap: () => controller.setSelectedPack(pack.id),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 160),
-                        decoration: BoxDecoration(
-                          color: selected ? const Color(0xFFCA0033) : const Color(0xFFFBFAED),
-                          borderRadius: BorderRadius.circular(28),
-                          boxShadow: selected
-                              ? const [
-                                  BoxShadow(
-                                    color: Color(0x23600013),
-                                    blurRadius: 24,
-                                    offset: Offset(0, 9),
-                                  ),
-                                ]
-                              : null,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              _iconForPack(pack.id),
-                              size: 29,
-                              color: selected ? Colors.white : const Color(0xFF64655C),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              biText(
-                                en: pack.nameEn,
-                                ne: pack.nameNe,
-                                language: state.language,
-                              ),
-                              style: GoogleFonts.plusJakartaSans(
-                                fontWeight: FontWeight.w800,
-                                color: selected ? Colors.white : const Color(0xFF373830),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 28),
                 SizedBox(
                   height: 64,
                   child: ElevatedButton(
@@ -316,6 +252,77 @@ class HomeScreen extends ConsumerWidget {
                       ],
                     ),
                   ),
+                ),
+                const SizedBox(height: 22),
+                Text(
+                  'SELECT CATEGORIES',
+                  style: GoogleFonts.plusJakartaSans(
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.1,
+                    color: const Color(0xFF64655C),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                GridView.builder(
+                  itemCount: packs.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 1.6,
+                  ),
+                  itemBuilder: (context, index) {
+                    final pack = packs[index];
+                    final selected = state.selectedPackIds.contains(pack.id);
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(24),
+                      onTap: () => controller.setSelectedPack(pack.id),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 160),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: selected ? const Color(0xFFCA0033) : const Color(0xFFFBFAED),
+                          borderRadius: BorderRadius.circular(24),
+                          boxShadow: selected
+                              ? const [
+                                  BoxShadow(
+                                    color: Color(0x23600013),
+                                    blurRadius: 16,
+                                    offset: Offset(0, 6),
+                                  ),
+                                ]
+                              : null,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              _iconForPack(pack.id),
+                              size: 22,
+                              color: selected ? Colors.white : const Color(0xFF64655C),
+                            ),
+                            const SizedBox(height: 4),
+                            FittedBox(
+                              child: Text(
+                                biText(
+                                  en: pack.nameEn,
+                                  ne: pack.nameNe,
+                                  language: state.language,
+                                ),
+                                style: GoogleFonts.plusJakartaSans(
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 13,
+                                  color: selected ? Colors.white : const Color(0xFF373830),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(height: 12),
                 SizedBox(

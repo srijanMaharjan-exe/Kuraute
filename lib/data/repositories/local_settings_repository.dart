@@ -7,6 +7,7 @@ class LocalSettingsRepository {
   static const _selectedPacksKey = 'selected_pack_ids';
   static const _languageCodeKey = 'language_code';
   static const _roundDurationKey = 'round_duration_seconds';
+  static const _discussionTimerEnabledKey = 'discussion_timer_enabled';
   static const _recentPlayersKey = 'recent_players';
 
   final Box _box;
@@ -27,6 +28,10 @@ class LocalSettingsRepository {
     return (_box.get(_roundDurationKey) as int?) ?? fallback;
   }
 
+  bool getDiscussionTimerEnabled({bool fallback = true}) {
+    return (_box.get(_discussionTimerEnabledKey) as bool?) ?? fallback;
+  }
+
   List<String> getRecentPlayers() {
     final raw = _box.get(_recentPlayersKey);
     if (raw is List) {
@@ -45,6 +50,10 @@ class LocalSettingsRepository {
 
   Future<void> saveRoundDurationSeconds(int seconds) {
     return _box.put(_roundDurationKey, seconds);
+  }
+
+  Future<void> saveDiscussionTimerEnabled(bool enabled) {
+    return _box.put(_discussionTimerEnabledKey, enabled);
   }
 
   Future<void> saveRecentPlayers(List<String> players) {

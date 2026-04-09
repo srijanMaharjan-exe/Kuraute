@@ -36,6 +36,7 @@ class GameState {
     this.gamePhase = GamePhase.setup,
     this.roundDurationSeconds = 90,
     this.remainingSeconds = 90,
+    this.discussionTimerEnabled = true,
   });
 
   final List<String> players;
@@ -48,6 +49,7 @@ class GameState {
   final GamePhase gamePhase;
   final int roundDurationSeconds;
   final int remainingSeconds;
+  final bool discussionTimerEnabled;
 
   bool get isConfigured =>
       players.length >= 3 &&
@@ -68,6 +70,7 @@ class GameState {
     GamePhase? gamePhase,
     int? roundDurationSeconds,
     int? remainingSeconds,
+    bool? discussionTimerEnabled,
   }) {
     return GameState(
       players: players ?? this.players,
@@ -80,6 +83,7 @@ class GameState {
       gamePhase: gamePhase ?? this.gamePhase,
       roundDurationSeconds: roundDurationSeconds ?? this.roundDurationSeconds,
       remainingSeconds: remainingSeconds ?? this.remainingSeconds,
+      discussionTimerEnabled: discussionTimerEnabled ?? this.discussionTimerEnabled,
     );
   }
 

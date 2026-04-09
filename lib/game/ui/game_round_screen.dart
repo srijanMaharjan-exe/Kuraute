@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,17 +22,20 @@ class _GameRoundScreenState extends ConsumerState<GameRoundScreen> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      final notifier = ref.read(gameControllerProvider.notifier);
-      notifier.tickRoundTimer();
-      final state = ref.read(gameControllerProvider);
-      if (state.gamePhase == GamePhase.result || state.remainingSeconds == 0) {
-        _timer?.cancel();
-        if (mounted) {
-          context.go('/result');
+    final timerEnabled = ref.read(gameControllerProvider).discussionTimerEnabled;
+    if (timerEnabled) {
+      _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+        final notifier = ref.read(gameControllerProvider.notifier);
+        notifier.tickRoundTimer();
+        final state = ref.read(gameControllerProvider);
+        if (state.gamePhase == GamePhase.result || state.remainingSeconds == 0) {
+          _timer?.cancel();
+          if (mounted) {
+            context.go('/result');
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   @override
@@ -46,10 +48,6 @@ class _GameRoundScreenState extends ConsumerState<GameRoundScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(gameControllerProvider);
     final controller = ref.read(gameControllerProvider.notifier);
-    final ratio = state.remainingSeconds / state.roundDurationSeconds;
-    final total = state.remainingSeconds;
-    final mm = (total ~/ 60).toString().padLeft(2, '0');
-    final ss = (total % 60).toString().padLeft(2, '0');
 
     if (state.players.isEmpty) {
       return const Scaffold(
@@ -104,127 +102,90 @@ class _GameRoundScreenState extends ConsumerState<GameRoundScreen> {
             ),
           ),
           const SizedBox(height: 18),
-          Center(
-            child: SizedBox(
-              width: 250,
-              height: 250,
-              child: Stack(
-                alignment: Alignment.center,
+          if (state.discussionTimerEnabled)
+            Center(
+              child: SizedBox(
+                width: 250,
+                height: 250,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      width: 232,
+                      height: 232,
+                      child: CircularProgressIndicator(
+                        value: state.remainingSeconds / state.roundDurationSeconds,
+                        strokeWidth: 16,
+                        color: const Color(0xFF776300),
+                        backgroundColor: const Color(0xFFE9E9DA),
+                        strokeCap: StrokeCap.round,
+                      ),
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '${(state.remainingSeconds ~/ 60).toString().padLeft(2, '0')}:${(state.remainingSeconds % 60).toString().padLeft(2, '0')}',
+                          style: GoogleFonts.plusJakartaSans(
+                            fontSize: 56,
+                            fontWeight: FontWeight.w900,
+                            color: const Color(0xFF373830),
+                            letterSpacing: -1,
+                          ),
+                        ),
+                        Text(
+                          'TIME LEFT',
+                          style: GoogleFonts.plusJakartaSans(
+                            fontWeight: FontWeight.w700,
+                            color: const Color(0xFF776300),
+                            letterSpacing: 1,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
+          else
+            Container(
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFBFAED),
+                borderRadius: BorderRadius.circular(28),
+                border: Border.all(color: const Color(0x22CA0033)),
+              ),
+              child: Column(
                 children: [
-                  SizedBox(
-                    width: 232,
-                    height: 232,
-                    child: CircularProgressIndicator(
-                      value: ratio,
-                      strokeWidth: 16,
-                      color: const Color(0xFF776300),
-                      backgroundColor: const Color(0xFFE9E9DA),
-                      strokeCap: StrokeCap.round,
+                  const Icon(Icons.forum_rounded, size: 44, color: Color(0xFFCA0033)),
+                  const SizedBox(height: 10),
+                  Text(
+                    'DISCUSSION MODE',
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      color: const Color(0xFF373830),
                     ),
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        '$mm:$ss',
-                        style: GoogleFonts.plusJakartaSans(
-                          fontSize: 56,
-                          fontWeight: FontWeight.w900,
-                          color: const Color(0xFF373830),
-                          letterSpacing: -1,
-                        ),
-                      ),
-                      Text(
-                        'TIME LEFT',
-                        style: GoogleFonts.plusJakartaSans(
-                          fontWeight: FontWeight.w700,
-                          color: const Color(0xFF776300),
-                          letterSpacing: 1,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
+                  const SizedBox(height: 8),
+                  Text(
+                    biText(
+                      en: 'No timer is running. Keep discussing until the group is ready to reveal.',
+                      ne: 'टाइमर बन्द छ। समूह तयार भएपछि मात्र नतिजा देखाउनुहोस्।',
+                      language: state.language,
+                    ),
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.manrope(
+                      color: const Color(0xFF64655C),
+                      fontWeight: FontWeight.w700,
+                      height: 1.35,
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-          const SizedBox(height: 16),
-          GridView.builder(
-            itemCount: math.min(state.players.length, 4),
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1,
-            ),
-            itemBuilder: (context, index) {
-              final name = state.players[index];
-              final highlighted = index == (state.kurauteIndex ?? 0);
-              return Container(
-                decoration: BoxDecoration(
-                  color: highlighted ? const Color(0x26A6A9FF) : const Color(0xFFFBFAED),
-                  borderRadius: BorderRadius.circular(28),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 34,
-                      backgroundColor: highlighted ? const Color(0xFFA6A9FF) : const Color(0xFFFFD709),
-                      child: Icon(
-                        Icons.face,
-                        color: highlighted ? const Color(0xFF2A2B8D) : const Color(0xFF5B4B00),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      name,
-                      style: GoogleFonts.plusJakartaSans(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                      ),
-                    ),
-                    if (highlighted)
-                      Text(
-                        'SUSPICIOUS?',
-                        style: GoogleFonts.plusJakartaSans(
-                          color: const Color(0xFF565ABB),
-                          fontWeight: FontWeight.w700,
-                          fontSize: 10,
-                        ),
-                      ),
-                  ],
-                ),
-              );
-            },
-          ),
-          const SizedBox(height: 12),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0x99E9E9DA),
-              borderRadius: BorderRadius.circular(22),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.lightbulb, color: Color(0xFFCA0033)),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    'Pro Tip: watch for players who hesitate while explaining clues.',
-                    style: GoogleFonts.manrope(
-                      color: const Color(0xFF64655C),
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               controller.finalizeRound();
